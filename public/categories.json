@@ -1,0 +1,17 @@
+[
+  {
+    "id": "01",
+    "name": "Novel",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqal8orbM0nIzBPLC0laSPiA_N-AEI-tyCug&usqp=CAU"
+  },
+  {
+    "id": "02",
+    "name": "Ghost Story Book",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpPlv7JavlLgarZ4fHMp7JyyscbVanLpplbgUKfM-v48Ww6utM5P6RuYiKBZPgxzhSsUU&usqp=CAU"
+  },
+  {
+    "id": "03",
+    "name": "Books for programming",
+    "image": "https://static.toiimg.com/thumb/msid-79096314,width-400,resizemode-4/79096314.jpg"
+  }
+]
