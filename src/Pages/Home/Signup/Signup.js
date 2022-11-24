@@ -1,38 +1,40 @@
-import React, { useContext, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../../../Context/AuthProvider';
+import React, { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Context/AuthProvider";
 
 const Signup = () => {
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm
-  ();
+  } = useForm();
 
-  const { createUser , updateUser }=useContext(AuthContext);
-  const [signupError, setSignupError] = useState()
-   
-  const handleSignup =(data) =>{
-    createUser(data.email, data.password) 
-    .then(result => {
-      const user =result.user;
-     
-      console.log(user);
-      
-     
-    })   
-    .catch(error => {
-      console.log(error)
-  
-    })
+  const { createUser, updateUser } = useContext(AuthContext);
+  const [signupError, setSignupError] = useState();
 
-}
+  const handleSignup = (data) => {
+    setSignupError('');
+    createUser(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast('User created successfully')
+        const userInfo ={
+          displayName : data.name
+        }
+        updateUser(userInfo)
+        .then(() =>{})
+        .catch(error => console.log(error))
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-    return (
-      <div className="flex justify-center">
+  return (
+    <div className="flex justify-center">
       <form onSubmit={handleSubmit(handleSignup)}>
         {/* register your input into the hook by invoking the "register" function */}
         <div className="form-control w-full max-w-xs my-5">
@@ -84,11 +86,8 @@ const Signup = () => {
           value="SignUp"
           className="btn btn-success my-3 w-full"
         />
-         <div>
-          {
-            <p className="text-red-500 py-1"></p>
-          }
-        </div>
+        <div>{
+          signupError && <p className="text-red-500 py-1">{signupError}</p>}</div>
         <p>
           Already have an account{" "}
           <Link to="/login" className="text-green-500">
