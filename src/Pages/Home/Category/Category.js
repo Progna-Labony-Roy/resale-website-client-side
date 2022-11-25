@@ -1,23 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import SingleCategory from './SingleCategory';
+import React from "react";
+import "./SingleCategory.css";
 
-const Category = () => {
-    const [categories , setCategories] =useState([]);
 
-    useEffect( () =>{
-       fetch('categories.json')
-       .then(res=> res.json())
-       .then(data=> setCategories(data))
-    },[])
-    return (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10'>
-         
-           {
-                categories.map(category => <SingleCategory key={category.id} category={category}></SingleCategory>)
-            }
-        
+const SingleCategory = ({ category }) => {
+  const { image, name } = category;
+
+  
+  return (
+    <div>
+      <div className="card w-96 bg-base-100 shadow-xl">
+        <figure>
+          <img className="category-image" src={image} alt={name} />
+        </figure>
+        <div className="card-body">
+          <h2 className="card-title">
+            {name}
+            <div className="badge badge-secondary">NEW</div>
+          </h2>
+          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <div className="card-actions justify-end">
+            <div className="badge badge-outline">Fashion</div>
+            <div className="btn btn-sm btn-outline">Avaiable Books</div>
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
-export default Category;
+export default SingleCategory;
