@@ -11,6 +11,7 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
 
+ 
   const { createUser, updateUser } = useContext(AuthContext);
   const [signupError, setSignupError] = useState();
 

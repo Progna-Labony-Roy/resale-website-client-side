@@ -5,7 +5,7 @@ const CategoryBook = ({ avaiableBook, setBookName }) => {
   const {
     name,
     Sellers_name,
-    Time_of_posting,
+    category_id,
     Year_of_use,
     book_img,
     original_price,
@@ -13,21 +13,12 @@ const CategoryBook = ({ avaiableBook, setBookName }) => {
   } = avaiableBook;
   console.log(avaiableBook);
 
-
   
-  // const url = `http://localhost:5000/books?category_id=${avaiableBook?.category_id}`
-
-  // const { data: books =[]} =useQuery({
-  //     queryKey:['books',avaiableBook?.category_id],
-  //     queryFn: async () =>{
-  //         const res =await fetch(url);
-  //         const data = await res.json();
-  //         return data;
-  //     }
-  // })
-
+  
+ 
   return (
     <div className="card w-96 bg-base-100 shadow-xl">
+      <h1>hi</h1>
       <figure>
         <img className="book-image" src={book_img} alt="" />
       </figure>
