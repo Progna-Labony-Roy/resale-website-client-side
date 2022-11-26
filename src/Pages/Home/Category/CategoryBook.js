@@ -1,11 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import './CategoryBook.css'
 const CategoryBook = ({ avaiableBook, setBookName }) => {
   const {
     name,
     Sellers_name,
-    category_id,
     Year_of_use,
     book_img,
     original_price,
