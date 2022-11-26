@@ -77,9 +77,9 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           {user?.uid ? (
-            <Link onClick={handleLogOut}>SignOut</Link>
+            <Link onClick={handleLogOut} className="btn btn-accent btn-sm">SignOut</Link>
           ) : (
-            <Link onClick={handleGoogleSignin} className="btn btn-outline btn-sm">Google Signin</Link>
+            <Link onClick={handleGoogleSignin} className="btn btn-accent btn-sm">Google Signin</Link>
           )}
         </div>
       </div>
