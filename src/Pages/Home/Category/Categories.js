@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import SingleCategory from './Category';
+import Category from './Category';
 
-const Category = () => {
+const Categories = () => {
     const [categories , setCategories] =useState([]);
+   
 
     useEffect( () =>{
        fetch('http://localhost:5000/categories')
@@ -13,11 +14,12 @@ const Category = () => {
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10'>
          
            {
-                categories.map(category => <SingleCategory key={category.id} category={category}></SingleCategory>)
+                categories.map(category => <Category key={category.id} category={category}
+                 ></Category>)
             }
         
         </div>
     );
 };
 
-export default Category;
+export default Categories;

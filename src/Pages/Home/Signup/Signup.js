@@ -15,22 +15,27 @@ const Signup = () => {
   const [signupError, setSignupError] = useState();
 
   const handleSignup = (data) => {
-    setSignupError('');
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
+        setSignupError('');
         console.log(user);
         toast('User created successfully')
         const userInfo ={
           displayName : data.name
         }
         updateUser(userInfo)
-        .then(() =>{})
+        .then(() =>{
+          
+        })
         .catch(error => console.log(error))
       })
       .catch((error) => {
         console.log(error);
+        setSignupError(error.message)
       });
+
+            
   };
 
   return (
@@ -81,6 +86,13 @@ const Signup = () => {
             <span className="text-red-500">{errors.password.message}</span>
           )}
         </div>
+        <div className="dropdown dropdown-end">
+  <label tabIndex={0} className="btn m-1">Choose</label>
+  <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+    <li> User</li>
+    <li>Seller</li>
+  </ul>
+</div>
         <input
           type="submit"
           value="SignUp"
@@ -94,10 +106,7 @@ const Signup = () => {
             Please Log in
           </Link>{" "}
         </p>
-        <div className="divider">OR</div>
-        <button className="btn btn-outline btn-accent w-full">
-          CONTINUE WITH GOOGLE
-        </button>
+       
       </form>
     </div>
   );

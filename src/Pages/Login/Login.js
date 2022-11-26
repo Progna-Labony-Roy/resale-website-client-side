@@ -15,21 +15,11 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const { signIn, googleSignIn } = useContext(AuthContext);
+  const { signIn } = useContext(AuthContext);
 
   const [loginError, setLoginError] = useState("");
 
-  const handleGithubSignIn = () => {
-    googleSignIn()
-      .then((res) => {
-        const user = res.user;
-        console.log(user);
-      })
-      .catch((error) => {
-        console.log(error.message);
-        setLoginError(error.message);
-      });
-  };
+
 
   const handleLogin = (data) => {
     setLoginError("");
@@ -91,13 +81,8 @@ const Login = () => {
             Create an account
           </Link>{" "}
         </p>
-        <div className="divider">OR</div>
-        <button
-          onClick={handleGithubSignIn}
-          className="btn btn-outline btn-accent w-full"
-        >
-          CONTINUE WITH GOOGLE
-        </button>
+        
+        
       </form>
     </div>
   );

@@ -3,12 +3,23 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, googleSignIn, logOut } = useContext(AuthContext);
 
   const handleLogOut = () => {
     logOut()
       .then(() => {})
       .catch((err) => console.log(err));
+  };
+
+  const handleGoogleSignin = () => {
+    googleSignIn()
+      .then((res) => {
+        const user = res.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
   const navItems = (
     <>
@@ -68,7 +79,7 @@ const Navbar = () => {
           {user?.uid ? (
             <Link onClick={handleLogOut}>SignOut</Link>
           ) : (
-            <Link className="btn btn-outline btn-sm">Google Signin</Link>
+            <Link onClick={handleGoogleSignin} className="btn btn-outline btn-sm">Google Signin</Link>
           )}
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import prototype from '../Images/prototype.png'
 
 const Blog = () => {
   return (
@@ -46,17 +47,22 @@ const Blog = () => {
         the major categories worth focusing on for most applications you build.
       </p>
       <div>
-        <h3 className="font-semibold text-xl text-indigo-500 italic mb-5">
+        <h3 className="font-semibold text-xl text-indigo-500 italic mb-5 mt-10">
           How does prototypical inheritance work?
         </h3>
+        <p className="mb-6">Every object with its methods and properties contains an internal and hidden property known as Prototype. The Prototypal Inheritance is a feature in javascript used to add methods and properties in objects. It is a method by which an object can inherit the properties and methods of another object. Traditionally, in order to get and set the Prototype of an object, we use Object.getPrototypeOf and Object.setPrototypeOf. Nowadays, in modern language, it is being set using __proto__.</p>
+        <img src={prototype} alt="" />
       </div>
       <div>
-        <h3 className="font-semibold text-xl text-indigo-500 italic mb-5">
+        <h3 className="font-semibold text-xl text-indigo-500 italic mb-5 mt-10">
           What is a unit test? Why should we write unit tests?
         </h3>
+        <p>
+        A unit test is a way of testing a unit - the smallest piece of code that can be logically isolated in a system. In most programming languages, that is a function, a subroutine, a method or property. The isolated part of the definition is important. In his book "Working Effectively with Legacy Code", author Michael Feathers states that such tests are not unit tests when they rely on external systems: “If it talks to the database, it talks across the network, it touches the file system, it requires system configuration, or it can't be run at the same time as any other test."
+        </p>
       </div>
       <div>
-        <h3 className="font-semibold text-xl text-indigo-500 italic mb-5">
+        <h3 className="font-semibold text-xl text-indigo-500 italic mb-5 mt-10">
           React vs. Angular vs. Vue?
         </h3>
       </div>
