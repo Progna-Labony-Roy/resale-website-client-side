@@ -19,7 +19,7 @@ const DashboardLayout = () => {
       <div className="flex-none hidden lg:block">
         <ul className="menu menu-horizontal">
          
-          <li><a>Navbar Item 1</a></li>
+          <li><a>My Orders</a></li>
           <li><a>Navbar Item 2</a></li>
         </ul>
       </div>
@@ -30,7 +30,7 @@ const DashboardLayout = () => {
     <label htmlFor="my-drawer-3" className="drawer-overlay"></label> 
     <ul className="menu p-4 w-80 bg-base-100">
      
-      <li><a>Sidebar Item 1</a></li>
+      <li><a>My Orders</a></li>
       <li><a>Sidebar Item 2</a></li>
       
     </ul>

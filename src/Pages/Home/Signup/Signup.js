@@ -25,7 +25,7 @@ const Signup = () => {
       setSignupError('');
         const user=result.user;
         console.log(user);
-        updateUser(name )
+        handleUpdateUser(name);
         form.reset();
         navigate('/');
         toast.success('User successfully login')
@@ -34,6 +34,17 @@ const Signup = () => {
         console.error(error);
         setSignupError(error.message);
     });
+  }
+
+    const handleUpdateUser=(name ,photoURL)=>{
+      const profile={
+        displayName:name ,
+        photoURL:photoURL
+      }
+      updateUser(profile)
+      .then( ()=>{})
+      .catch(error => console.error(error));
+
   }
 
   return (
@@ -98,7 +109,7 @@ const Signup = () => {
                   name="buyerSeller"
                   value="seller"
                   className="radio checked:bg-blue-500"
-                  onChange={e =>buyerSeller}
+                  onChange={e =>setBuyerSeller(e.target.value)}
                 />
               </label>
             </div>
