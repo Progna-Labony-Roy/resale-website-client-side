@@ -11,7 +11,11 @@ const MyOrders = () => {
   const { data: orderedBooks = [] } = useQuery({
     queryKey: ["orderedBooks", user?.email],
     queryFn: async () => {
-      const result = await fetch(url);
+      const result = await fetch(url,{
+        headers: {
+            authorization: `bearer ${localStorage.getItem('Token')}`
+        }
+      });
       const data = await result.json();
       return data;
     },
@@ -32,7 +36,7 @@ const MyOrders = () => {
           </tr>
         </thead>
         <tbody>
-          {orderedBooks.map((orderedBookt, i) => (
+          {orderedBooks?.length && orderedBooks.map((orderedBookt, i) => (
             <tr>
               <th>{i+1}</th>
               <td>{displayName}</td>

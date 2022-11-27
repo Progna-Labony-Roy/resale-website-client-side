@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 
 const DashboardLayout = () => {
@@ -19,8 +19,8 @@ const DashboardLayout = () => {
       <div className="flex-none hidden lg:block">
         <ul className="menu menu-horizontal">
          
-          <li><a>My Orders</a></li>
-          <li><a>Navbar Item 2</a></li>
+          <li><Link to=''>My Orders</Link></li>
+          <li><Link to=''>Navbar Item 2</Link></li>
         </ul>
       </div>
     </div>
@@ -30,8 +30,8 @@ const DashboardLayout = () => {
     <label htmlFor="my-drawer-3" className="drawer-overlay"></label> 
     <ul className="menu p-4 w-80 bg-base-100">
      
-      <li><a>My Orders</a></li>
-      <li><a>Sidebar Item 2</a></li>
+      <li><Link to=''>My Orders</Link></li>
+      <li><Link to=''>Sidebar Item 2</Link></li>
       
     </ul>
     

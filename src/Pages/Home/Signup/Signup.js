@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
+import useToken from "../../../Hooks/useToken";
 
 const Signup = () => {
   const navigate=useNavigate();
@@ -10,6 +11,13 @@ const Signup = () => {
   const { createUser, updateUser } = useContext(AuthContext);
   const [signupError, setSignupError] = useState();
   const [buyerSeller,setBuyerSeller] =useState();
+  const [createdUserEmail, setCreatedUserEmail]=useState('')
+  const [token]=useToken(createdUserEmail);
+
+  if(token){
+    navigate('/')
+  }
+
   
   const handleSignin = (event) =>{
     event.preventDefault();
@@ -25,9 +33,9 @@ const Signup = () => {
       setSignupError('');
         const user=result.user;
         console.log(user);
-        handleUpdateUser(name);
+        handleUpdateUser(name,email);
         form.reset();
-        navigate('/');
+        
         toast.success('User successfully login')
     })
     .catch((error) => {
@@ -36,16 +44,36 @@ const Signup = () => {
     });
   }
 
-    const handleUpdateUser=(name ,photoURL)=>{
+  
+    const handleUpdateUser=(name ,email)=>{
       const profile={
         displayName:name ,
-        photoURL:photoURL
+        email:email
       }
       updateUser(profile)
-      .then( ()=>{})
+      .then( ()=>{
+        saveUsers(name,email)
+      })
       .catch(error => console.error(error));
 
   }
+
+  const saveUsers = (name, email) =>{
+    const user ={name ,email};
+    fetch('http://localhost:5000/users',{
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+    .then(res => res.json())
+    .then(data =>{
+     setCreatedUserEmail(email);
+    })
+  }
+
+  
 
   return (
     <div className="flex justify-center">
