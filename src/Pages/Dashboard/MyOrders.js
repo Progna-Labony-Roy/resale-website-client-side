@@ -36,8 +36,8 @@ const MyOrders = () => {
           </tr>
         </thead>
         <tbody>
-          {orderedBooks?.length && orderedBooks.map((orderedBookt, i) => (
-            <tr>
+          {orderedBooks?.length && orderedBooks.map((orderedBook, i) => (
+            <tr key={orderedBook._id}>
               <th>{i+1}</th>
               <td>{displayName}</td>
               <td>{email}</td>

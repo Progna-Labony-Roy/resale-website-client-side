@@ -5,11 +5,11 @@ import Categories from "../Pages/Home/Category/Categories";
 import Login from "../Pages/Login/Login";
 import Home from "../Pages/Home/Home";
 import Signup from "../Pages/Home/Signup/Signup";
-import Dashboard from "../Pages/Dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import CategoryBooks from "../Pages/Home/Category/CategoryBooks";
 import DashboardLayout from "../Layout/DashboardLayout";
 import MyOrders from "../Pages/Dashboard/MyOrders";
+import AllUsers from "../Pages/Dashboard/AllUsers";
 
 
 const router= createBrowserRouter([
@@ -51,7 +51,12 @@ const router= createBrowserRouter([
             {
               path: '/dashboard',
               element:<MyOrders></MyOrders>
-            }
+            },
+            {
+              path: '/dashboard/allusers',
+              element:<AllUsers></AllUsers>
+            },
+
           ]
         }
 
