@@ -22,7 +22,7 @@ const AddProduct = () => {
   const { data: categoryNames, isLoading } = useQuery({
     queryKey: ["categoryName"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/categoryNames");
+      const res = await fetch("https://resale-web-server-eight.vercel.app/categoryNames");
       const data = await res.json();
       return data;
     },
@@ -38,7 +38,7 @@ const AddProduct = () => {
     console.log(data)
     const image= data.bookImage[0]
     formData.append("image",image);
-    const url =`https://api.imgbb.com/1/upload?expiration=600&key=${imageApiKey}`;
+    const url =`https://api.imgbb.com/1/upload?key=${imageApiKey}`;
     fetch(url ,{
       method: 'POST',
       body: formData
@@ -54,21 +54,22 @@ const AddProduct = () => {
           Year_of_use: data.yearOfUse,
           book_img :imgData.data.url,
           original_price: data.originalPrice,
+          resale_price: data.resalePrice,
           location :data.location,
           book_name :data.bookName
         }
 
-        fetch('http://localhost:5000/books',{
+        fetch('https://resale-web-server-eight.vercel.app/books',{
           method:'POST',
           headers:{
             'content-type':'application/json',
-            authorization: `bearer ${localStorage.getItem('accessTolen')}`
+            authorization: `bearer ${localStorage.getItem('Token')}`
           },
           body: JSON.stringify(books)
         })
         .then(res=> res.json())
         .then(result =>{
-          toast('Product added successfully')
+          toast.success('Product added successfully')
           navigate('/dashboard/myproducts')
           console.log(result)
         })

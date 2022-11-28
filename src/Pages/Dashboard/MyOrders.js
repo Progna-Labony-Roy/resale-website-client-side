@@ -6,7 +6,7 @@ const MyOrders = () => {
   const { user } = useContext(AuthContext);
   const {email , displayName} =user;
 
-  const url = `http://localhost:5000/orderedBooks?email=${user?.email}`;
+  const url = `https://resale-web-server-eight.vercel.app/orderedBooks?email=${user?.email}`;
 
   const { data: orderedBooks = [] } = useQuery({
     queryKey: ["orderedBooks", user?.email],
@@ -27,24 +27,22 @@ const MyOrders = () => {
         <thead>
           <tr>
             <th></th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Status</th>
-            <th>Varification</th>
-            <th>Admin</th>
-            <th>Favorite Color</th>
+            <th>Buyer name</th>
+            <th>Ordered book</th>
+           
+            <th>Payment</th>
           </tr>
         </thead>
         <tbody>
           {orderedBooks?.length && orderedBooks.map((orderedBook, i) => (
-            <tr key={orderedBook._id}>
+            <tr key={orderedBook._id} orderedBook={orderedBook}>
               <th>{i+1}</th>
               <td>{displayName}</td>
               <td>{email}</td>
-              <td>Littel, Schaden and Vandervort</td>
-              <td>Canada</td>
-              <td>12/16/2020</td>
-              <td>Blue</td>
+             
+              <td>
+                <button className="btn btn-sm btn-outline">Pay</button>
+              </td>
             </tr>
           ))}
         </tbody>

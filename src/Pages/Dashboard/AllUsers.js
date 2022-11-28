@@ -1,23 +1,55 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../Context/AuthProvider";
+import ConfirmModal from "../../Shared/ConfirmModal";
+import Loader from "../../Shared/Loader";
 
 
 const AllUsers = () => {
-  const { data: users = [], refetch } = useQuery({
+  const [deleteUser, setDeleteUser ] =useState();
+
+  const cancel =() =>{
+    setDeleteUser(null)
+  }
+
+  const { data: users =[] ,isLoading, refetch } = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
-      const result = await fetch("http://localhost:5000/users");
+      const result = await fetch("https://resale-web-server-eight.vercel.app/users");
       const data = await result.json();
       return data;
     },
   });
 
+  if(isLoading){
+    return <Loader></Loader>
+  }
+
+  const handleDeleteUser = user =>{
+    console.log(user._id)
+    fetch(`https://resale-web-server-eight.vercel.app/users/${user._id}`,{
+      method: 'DELETE',
+      headers: {
+        authorization: `bearer ${localStorage.getItem('Token')}`
+      }
+    })
+    .then(res => res.json())
+    .then(data =>{
+      console.log(data)
+      if(data.deletedCount >0){
+        refetch();
+      toast.success(`Deleted successfully`)
+      }
+      
+    })
+  }
+
   const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/users/allusers/${id}`, {
+    fetch(`https://resale-web-server-eight.vercel.app/users/allusers/${id}`, {
       method: "PUT",
       headers: {
-        authorization: `bearer ${localStorage.getItem("Token")}`,
+        authorization: `bearer ${localStorage.getItem("Token")}`
       },
     })
       .then((res) => res.json())
@@ -28,8 +60,11 @@ const AllUsers = () => {
         }
       });
   };
+
+  
   return (
-    <div className="overflow-x-auto">
+    <div>
+      <div className="overflow-x-auto">
       <table className="table table-compact w-full">
         <thead>
           <tr>
@@ -50,7 +85,7 @@ const AllUsers = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{!user.status ? user.role : user.status}</td>
-                <td>Canada</td>
+                <td>{user?.status === 'Seller' && user?.role === 'Admin' ? <p>Varified</p> : ''}</td>
                 <td>
                     {user?.role === 'Admin' ?
                     <p>Admin</p>
@@ -70,12 +105,24 @@ const AllUsers = () => {
                     }
                 </td>
                 <td>
-                  <button className="btn btn-xs btn-primary">Delete</button>
+                <label htmlFor="confirm-modal" 
+                onClick={() =>{ setDeleteUser(user)}}
+                className="btn btn-sm btn-error mt-3" >Delete</label>
                 </td>
               </tr>
             ))}
         </tbody>
       </table>
+    </div>
+    {
+      deleteUser && <ConfirmModal
+      title={`Do you want to delete?`}
+      message={ `Delete permanently`}
+      handleDeleteUser={handleDeleteUser}
+      modalData={deleteUser}
+      cancel={cancel}
+      ></ConfirmModal>
+    }
     </div>
   );
 };

@@ -3,6 +3,7 @@ import './CategoryBook.css'
 const CategoryBook = ({ avaiableBook, setBookName }) => {
   const {
     name,
+    book_name,
     Sellers_name,
     Year_of_use,
     book_img,
@@ -16,13 +17,12 @@ const CategoryBook = ({ avaiableBook, setBookName }) => {
  
   return (
     <div className="card w-96 bg-base-100 shadow-xl">
-      <h1>hi</h1>
       <figure>
         <img className="book-image" src={book_img} alt="" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">
-          {name}
+          { book_name}
           <div className="badge badge-secondary p-3">Seller Name:{Sellers_name}</div>
         </h2>
         <div className="card-actions ">

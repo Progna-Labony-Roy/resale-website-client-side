@@ -11,14 +11,16 @@ import DashboardLayout from "../Layout/DashboardLayout";
 import MyOrders from "../Pages/Dashboard/MyOrders";
 import AllUsers from "../Pages/Dashboard/AllUsers";
 import AdminRoute from "./AdminRoute";
-import AddBooks from "../Pages/Dashboard/AddProduct";
 import AddProduct from "../Pages/Dashboard/AddProduct";
+import MyProducts from "../Pages/Dashboard/MyProducts";
+import ErrorElement from "../Shared/ErrorElement";
 
 
 const router= createBrowserRouter([
     {
       path:'/',
       element: <Main></Main>,
+      errorElement:<ErrorElement></ErrorElement>,
       children: [
         {
           path: '/',
@@ -45,7 +47,7 @@ const router= createBrowserRouter([
         {
           path:'/category/:id',
           element:<CategoryBooks></CategoryBooks>,
-          loader : ({params}) => fetch(`http://localhost:5000/category2/${params.id}`)
+          loader : ({params}) => fetch(`https://resale-web-server-eight.vercel.app/category2/${params.id}`)
         },
         {
           path: '/blog',
@@ -54,7 +56,8 @@ const router= createBrowserRouter([
         {
           path: '/dashboard',
           element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
-          loader: () => fetch('http://localhost:5000/users'),
+          loader: () => fetch('https://resale-web-server-eight.vercel.app/users'),
+          errorElement:<ErrorElement></ErrorElement>,
           children:[
             {
               path: '/dashboard',
@@ -70,7 +73,7 @@ const router= createBrowserRouter([
             },
             {
               path: '/dashboard/myproducts',
-              element:<AdminRoute><AddProduct></AddProduct></AdminRoute>
+              element:<AdminRoute><MyProducts></MyProducts></AdminRoute>
             }
 
           ]

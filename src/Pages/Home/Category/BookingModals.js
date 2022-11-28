@@ -25,7 +25,7 @@ const orderedBooks= {
    phone
 }
 
-fetch('http://localhost:5000/orderedBooks',{
+fetch('https://resale-web-server-eight.vercel.app/orderedBooks',{
   method: "POST",
   headers:{
     "content-type" : 'application/json'

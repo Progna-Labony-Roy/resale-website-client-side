@@ -10,7 +10,7 @@ const CategoryBooks = () => {
   const [bookName ,setBookName] = useState(null); 
 // console.log(bookName)
   
-const url = `http://localhost:5000/category/${avaiableBooks.name}`
+const url = `https://resale-web-server-eight.vercel.app/category/${avaiableBooks.name}`
 
   const { data: books =[]} =useQuery({
       queryKey:['books'],
@@ -22,7 +22,7 @@ const url = `http://localhost:5000/category/${avaiableBooks.name}`
   })
 const filterBooks =books.filter(b => b.name === avaiableBooks.name)
 
-  return <div> 
+  return <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10'> 
     {
         filterBooks.map(avaiableBook => <CategoryBook key={avaiableBook._id} avaiableBook={avaiableBook}   setBookName={setBookName}></CategoryBook>)
     }
