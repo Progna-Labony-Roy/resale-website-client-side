@@ -14,7 +14,7 @@ const Categories = () => {
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10'>
          
            {
-                categories.map(category => <Category key={category.id} category={category}
+                categories.map(category => <Category key={category._id} category={category}
                  ></Category>)
             }
         

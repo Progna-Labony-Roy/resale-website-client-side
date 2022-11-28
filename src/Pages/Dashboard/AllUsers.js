@@ -1,14 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
+import React from "react";
 import toast from "react-hot-toast";
-import { AuthContext } from "../../Context/AuthProvider";
+
 
 const AllUsers = () => {
-  const { user } = useContext(AuthContext);
-  const { email, displayName } = user;
-
   const { data: users = [], refetch } = useQuery({
-    queryKey: ["users"],
+    queryKey: ['users'],
     queryFn: async () => {
       const result = await fetch("http://localhost:5000/users");
       const data = await result.json();
@@ -17,7 +14,7 @@ const AllUsers = () => {
   });
 
   const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/users/admin/${id}`, {
+    fetch(`http://localhost:5000/users/allusers/${id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("Token")}`,
@@ -50,27 +47,27 @@ const AllUsers = () => {
             users.map((user, i) => (
               <tr key={user._id}>
                 <th>{i + 1}</th>
-                <td>{displayName}</td>
-                <td>{email}</td>
-                <td>Littel, Schaden and Vandervort</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{!user.status ? user.role : user.status}</td>
                 <td>Canada</td>
                 <td>
-                    {user?.role === 'admin' ?
+                    {user?.role === 'Admin' ?
                     <p>Admin</p>
-                    : <button
+                    : <>
+                    {
+                     ( user.status) === 'Buyer' ?
+                      <button></button>
+                      :
+                      <button
                     onClick={() => handleMakeAdmin(user._id)}
                     className="btn btn-xs btn-outline"
                   >
                     Make Admin
-                  </button>}
-                  {/* {user?.role !== "admin" && (
-                    <button
-                      onClick={() => handleMakeAdmin(user._id)}
-                      className="btn btn-xs btn-outline"
-                    >
-                      Make Admin
-                    </button>
-                  )} */}
+                  </button>
+                    }
+                    </>
+                    }
                 </td>
                 <td>
                   <button className="btn btn-xs btn-primary">Delete</button>

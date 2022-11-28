@@ -10,6 +10,9 @@ import CategoryBooks from "../Pages/Home/Category/CategoryBooks";
 import DashboardLayout from "../Layout/DashboardLayout";
 import MyOrders from "../Pages/Dashboard/MyOrders";
 import AllUsers from "../Pages/Dashboard/AllUsers";
+import AdminRoute from "./AdminRoute";
+import AddBooks from "../Pages/Dashboard/AddProduct";
+import AddProduct from "../Pages/Dashboard/AddProduct";
 
 
 const router= createBrowserRouter([
@@ -21,6 +24,10 @@ const router= createBrowserRouter([
           path: '/',
           element:<Home></Home>,
           
+        },
+        {
+          path:'/',
+          element:<Categories></Categories>
         },
         {
           path: '/login',
@@ -38,7 +45,7 @@ const router= createBrowserRouter([
         {
           path:'/category/:id',
           element:<CategoryBooks></CategoryBooks>,
-          loader : () => fetch(`http://localhost:5000/books/`)
+          loader : ({params}) => fetch(`http://localhost:5000/category2/${params.id}`)
         },
         {
           path: '/blog',
@@ -47,6 +54,7 @@ const router= createBrowserRouter([
         {
           path: '/dashboard',
           element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+          loader: () => fetch('http://localhost:5000/users'),
           children:[
             {
               path: '/dashboard',
@@ -54,8 +62,16 @@ const router= createBrowserRouter([
             },
             {
               path: '/dashboard/allusers',
-              element:<AllUsers></AllUsers>
+              element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
+            {
+              path: '/dashboard/addbooks',
+              element:<AdminRoute><AddProduct></AddProduct></AdminRoute>
+            },
+            {
+              path: '/dashboard/myproducts',
+              element:<AdminRoute><AddProduct></AddProduct></AdminRoute>
+            }
 
           ]
         }

@@ -5,75 +5,81 @@ import { AuthContext } from "../../../Context/AuthProvider";
 import useToken from "../../../Hooks/useToken";
 
 const Signup = () => {
-  const navigate=useNavigate();
-
+  const navigate = useNavigate();
 
   const { createUser, updateUser } = useContext(AuthContext);
   const [signupError, setSignupError] = useState();
-  const [buyerSeller,setBuyerSeller] =useState();
-  const [createdUserEmail, setCreatedUserEmail]=useState('')
-  const [token]=useToken(createdUserEmail);
+  let [buyerSeller, setBuyerSeller] = useState('Buyer');
+  const [createdUserEmail, setCreatedUserEmail] = useState('');
+  const [token] = useToken(createdUserEmail);
 
-  if(token){
-    navigate('/')
+  if (token) {
+    navigate("/");
   }
 
+  console.log(buyerSeller)
   
-  const handleSignin = (event) =>{
+  // if(buyerSeller === ''){
+  //    buyerSeller="Buyer";
+  // }
+
+
+  const handleSignin = (event) => {
     event.preventDefault();
     const form = event.target;
-    const name =form.name.value;
-    const email= form.email.value;
+    const name = form.name.value;
+    const email = form.email.value;
     const password = form.password.value;
-    console.log(buyerSeller);
-    
+   
+   
 
-    createUser(email,password)
-    .then((result) =>{
-      setSignupError('');
-        const user=result.user;
+    createUser(email, password)
+      .then((result) => {
+        setSignupError("");
+        
+        const user = result.user;
         console.log(user);
-        handleUpdateUser(name,email);
+        handleUpdateUser(name, email);
         form.reset();
         
-        toast.success('User successfully login')
-    })
-    .catch((error) => {
+        toast.success("User successfully login");
+      })
+      .catch((error) => {
         console.error(error);
         setSignupError(error.message);
-    });
-  }
+      });
+  };
 
-  
-    const handleUpdateUser=(name ,email)=>{
-      const profile={
-        displayName:name ,
-        email:email
-      }
-      updateUser(profile)
-      .then( ()=>{
-        saveUsers(name,email)
+  const handleUpdateUser = (name, email) => {
+    const profile = {
+      displayName: name,
+      email: email,
+      // role
+      role: buyerSeller,
+    };
+    updateUser(profile)
+      .then(() => {
+        saveUsers(name, email);
       })
-      .catch(error => console.error(error));
+      .catch((error) => console.error(error));
+  };
 
-  }
-
-  const saveUsers = (name, email) =>{
-    const user ={name ,email};
-    fetch('http://localhost:5000/users',{
-      method: 'POST',
+  const saveUsers = (name, email) => {
+    let user = { name, email ,status:buyerSeller};
+    fetch("http://localhost:5000/users", {
+      method: "POST",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json",
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(user),
     })
-    .then(res => res.json())
-    .then(data =>{
-     setCreatedUserEmail(email);
-    })
-  }
+      .then((res) => res.json())
+      .then((data) => {
+        setCreatedUserEmail(email);
+        
+      });
+  };
 
-  
 
   return (
     <div className="flex justify-center">
@@ -115,6 +121,13 @@ const Signup = () => {
             />
           </div>
 
+          {/* <select name='role'  className="select select-bordered w-full max-w-xs">
+            <option value='Buyer' selected>
+              Buyer
+            </option>
+            <option value='Seller'>Seller</option>
+          </select> */}
+
           <div className="w-full max-w-xs">
             <div className="form-control">
               <label className="label cursor-pointer">
@@ -122,7 +135,7 @@ const Signup = () => {
                 <input
                   type="radio"
                   name="buyerSeller"
-                  value="buyer"
+                  value="Buyer"
                   className="radio checked:bg-blue-500"
                   defaultChecked
                   onChange={e =>setBuyerSeller(e.target.value )}
@@ -135,7 +148,7 @@ const Signup = () => {
                 <input
                   type="radio"
                   name="buyerSeller"
-                  value="seller"
+                  value="Seller"
                   className="radio checked:bg-blue-500"
                   onChange={e =>setBuyerSeller(e.target.value)}
                 />

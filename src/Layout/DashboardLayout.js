@@ -6,6 +6,7 @@ import useAdmin from '../Hooks/useAdmin';
 
 const DashboardLayout = () => {
   const { user } =useContext(AuthContext);
+
   const [isAdmin] =useAdmin(user?.email);
     return (
         <div>
@@ -24,7 +25,12 @@ const DashboardLayout = () => {
         <ul className="menu menu-horizontal">
          
           <li><Link to='/dashboard'>My Orders</Link></li>
-          <li><Link to='/dashboard/allusers'>All Users</Link></li>
+          {
+        isAdmin && <>
+        <li><Link to='/dashboard/allusers'>All Users</Link></li>
+        <li><Link to='/dashboard/addBooks'>Add a product</Link></li>
+        </>
+      }
         </ul>
       </div>
     </div>
@@ -36,7 +42,10 @@ const DashboardLayout = () => {
      
       <li><Link to='/dashboard'>My Orders</Link></li>
       {
-        isAdmin && <li><Link to='/dashboard/allusers'>All Users</Link></li>
+        isAdmin && <>
+        <li><Link to='/dashboard/allusers'>All Users</Link></li>
+        <li><Link to='/dashboard/addbooks'>Add a product</Link></li>
+        </>
       }
       
     </ul>

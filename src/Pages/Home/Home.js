@@ -1,4 +1,5 @@
 import React from "react";
+import Categories from "./Category/Categories";
 import Slider from "./Slider";
 
 const Home = () => {
@@ -9,6 +10,8 @@ const Home = () => {
         online.
       </h1>
       <Slider></Slider>
+
+      <Categories></Categories>
 
       {/* Frequently asked question */}
       <div className="max-w-screen-lg mx-auto py-12">

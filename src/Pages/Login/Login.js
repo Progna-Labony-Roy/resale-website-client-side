@@ -6,12 +6,7 @@ import useToken from "../../Hooks/useToken";
 
 const Login = () => {
 
-  const location =useLocation();
-  const navigate =useNavigate();
-
-  const from= location.state?.from?.pathname || '/';
-
-  const {
+    const {
     register,
     handleSubmit,
     formState: { errors },
@@ -22,7 +17,10 @@ const Login = () => {
   const [loginError, setLoginError] = useState("");
   const [loginUserEmail, setLoginUserEmail] = useState('');
   const [token] =useToken(loginUserEmail);
+  const location =useLocation();
+  const navigate =useNavigate();
 
+  const from= location.state?.from?.pathname || '/';
 
 if(token){
   navigate(from, {replace:true})
@@ -37,6 +35,7 @@ if(token){
       })
       .catch((error) => {
         console.log(error);
+        setLoginError(error.message)
       });
   };
 

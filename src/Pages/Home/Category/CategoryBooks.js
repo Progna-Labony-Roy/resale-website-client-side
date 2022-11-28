@@ -6,27 +6,25 @@ import CategoryBook from "./CategoryBook";
 
 const CategoryBooks = () => {
   const avaiableBooks = useLoaderData();
-  // console.log(avaiableBooks)
+ 
   const [bookName ,setBookName] = useState(null); 
 // console.log(bookName)
   
-// const url = `http://localhost:5000/books?category_id=${category_id}`
+const url = `http://localhost:5000/category/${avaiableBooks.name}`
 
-//   const { data: books =[]} =useQuery({
-//       queryKey:['books',category_id],
-//       queryFn: async () =>{
-//           const res =await fetch(url);
-//           const data = await res.json();
-//           return data;
-//       }
-//   })
+  const { data: books =[]} =useQuery({
+      queryKey:['books'],
+      queryFn: async () =>{
+          const res =await fetch(url);
+          const data = await res.json();
+          return data;
+      }
+  })
+const filterBooks =books.filter(b => b.name === avaiableBooks.name)
 
   return <div> 
-
-
-
     {
-        avaiableBooks.map(avaiableBook => <CategoryBook key={avaiableBook._id} avaiableBook={avaiableBook}   setBookName={setBookName}></CategoryBook>)
+        filterBooks.map(avaiableBook => <CategoryBook key={avaiableBook._id} avaiableBook={avaiableBook}   setBookName={setBookName}></CategoryBook>)
     }
     
    { bookName && <BookingModals bookName={bookName} setBookName={setBookName}></BookingModals>}

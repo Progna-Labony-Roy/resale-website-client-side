@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';
+import Loader from '../Shared/Loader';
 
 const PrivateRoute = ({children}) => {
     const { user ,loading } =useContext(AuthContext);
@@ -8,11 +9,7 @@ const PrivateRoute = ({children}) => {
 
 
     if(loading){
-        return <>
-        <div className='flex justify-center items-center h-full'>
-      <div className='w-6 h-6 border-2 border-dashed rounded-full animate-spin border-white'></div>
-    </div>
-        </>
+        return <Loader></Loader>
     }
     if(user){
         return children;
