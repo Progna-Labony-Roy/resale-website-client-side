@@ -13,14 +13,16 @@ const CategoryBook = ({ avaiableBook, setBookName }) => {
     original_price,
     resale_price,
     location,
-    sales_status
-  } = avaiableBook;
+    time_of_posting
+    } = avaiableBook;
   console.log(avaiableBook);
 
   const { user } = useContext(AuthContext);
   const [isVarified] = useSeller(user?.email);
 
   return (
+   <div>
+   
     <div className="card w-96 bg-base-100 shadow-xl">
       <figure>
         <img className="book-image" src={book_img} alt="" />
@@ -44,7 +46,7 @@ const CategoryBook = ({ avaiableBook, setBookName }) => {
           <div className="badge badge-outline p-3">
             Years of use :{Year_of_use}y
           </div>
-          <div className="badge badge-outline p-3">Time of Posting :</div>
+          <div className="badge badge-outline p-3">Time of Posting :{time_of_posting}</div>
         </div>
         <div className="flex">
           <div>Seller :{Sellers_name} </div>
@@ -72,6 +74,7 @@ const CategoryBook = ({ avaiableBook, setBookName }) => {
         </div>
       </div>
     </div>
+   </div>
   );
 };
 

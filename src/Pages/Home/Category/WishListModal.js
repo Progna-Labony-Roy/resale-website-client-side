@@ -25,7 +25,7 @@ const WishListModal = ({bookName ,setBookName}) => {
      phone
   }
   
-  fetch('https://resale-web-server-progna-labony-roy.vercel.app/wishlist',{
+  fetch('https://resale-web-server-eight.vercel.app/wishlist',{
     method: "POST",
     headers:{
       "content-type" : 'application/json'

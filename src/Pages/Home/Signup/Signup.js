@@ -66,7 +66,7 @@ const Signup = () => {
 
   const saveUsers = (name, email) => {
     let user = { name, email ,status:buyerSeller};
-    fetch("https://resale-web-server-progna-labony-roy.vercel.app/users", {
+    fetch("https://resale-web-server-eight.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",

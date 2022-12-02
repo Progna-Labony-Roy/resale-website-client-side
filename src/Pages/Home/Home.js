@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthProvider";
+import Advertisement from "./Category/Advertisement";
 import Categories from "./Category/Categories";
 import Slider from "./Slider";
 
 const Home = () => {
+  const {user}=useContext(AuthContext)
+  const avaiableBooks= useLoaderData();
+  // console.log(avaiableBooks)
   return (
     <div>
       <h1 className="mt-12 font-semibold font-sans text-3xl text-center italic text-green-500">
@@ -50,6 +56,10 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10'> {
+       user?.email && avaiableBooks?.length && avaiableBooks.map(avaiableBook => <Advertisement key={avaiableBook._id} avaiableBook={avaiableBook}></Advertisement>)
+      } </div>
+     
     </div>
   );
 };

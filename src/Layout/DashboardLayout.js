@@ -40,7 +40,7 @@ const DashboardLayout = () => {
                   <Link to="/dashboard">My Orders</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/wishlist">My WishList</Link>
+                  <Link to="/dashboard/mywishlist">My WishList</Link>
                 </li>
                 {isAdmin && (
                   <li>
@@ -69,7 +69,7 @@ const DashboardLayout = () => {
               <Link to="/dashboard">My Orders</Link>
             </li>
             <li>
-                  <Link to="/dashboard/wishlist">My WishList</Link>
+                  <Link to="/dashboard/mywishlist">My WishList</Link>
                 </li>
             {isAdmin && (
               <>

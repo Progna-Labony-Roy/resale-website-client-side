@@ -6,7 +6,7 @@ const Categories = () => {
    
 
     useEffect( () =>{
-       fetch('https://resale-web-server-progna-labony-roy.vercel.app/categories')
+       fetch('https://resale-web-server-eight.vercel.app/categories')
        .then(res=> res.json())
        .then(data=> setCategories(data))
     },[])

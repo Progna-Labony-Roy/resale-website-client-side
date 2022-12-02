@@ -30,7 +30,7 @@ const orderedBooks= {
    phone
 }
 
-fetch('https://resale-web-server-progna-labony-roy.vercel.app/orderedBooks',{
+fetch('https://resale-web-server-eight.vercel.app/orderedBooks',{
   method: "POST",
   headers:{
     "content-type" : 'application/json'

@@ -15,7 +15,7 @@ const AllUsers = () => {
   const { data: users =[] ,isLoading, refetch } = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
-      const result = await fetch("https://resale-web-server-progna-labony-roy.vercel.app/users");
+      const result = await fetch("https://resale-web-server-eight.vercel.app/users");
       const data = await result.json();
       return data;
     },
@@ -27,7 +27,7 @@ const AllUsers = () => {
 
   const handleDeleteUser = user =>{
     console.log(user._id)
-    fetch(`https://resale-web-server-progna-labony-roy.vercel.app/users/${user._id}`,{
+    fetch(`https://resale-web-server-eight.vercel.app/users/${user._id}`,{
       method: 'DELETE',
       headers: {
         authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -45,7 +45,7 @@ const AllUsers = () => {
   }
 
   const handleMakeAdmin = (id) => {
-    fetch(`https://resale-web-server-progna-labony-roy.vercel.app/users/admin/${id}`, {
+    fetch(`https://resale-web-server-eight.vercel.app/users/admin/${id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`
@@ -63,7 +63,7 @@ const AllUsers = () => {
 
 
   const handleVerify = (id) =>{
-fetch(`https://resale-web-server-progna-labony-roy.vercel.app/users/verify/${id}`,{
+fetch(`https://resale-web-server-eight.vercel.app/users/verify/${id}`,{
   method: 'PUT',
   headers: {
     authorization: `bearer ${localStorage.getItem("accessToken")}`

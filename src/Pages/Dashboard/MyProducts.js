@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import ConfirmModal from "../../Shared/ConfirmModal";
 import Loader from "../../Shared/Loader";
@@ -13,7 +14,7 @@ const MyProducts = () => {
     setDeleteProduct(null);
   };
 
-  const url = `https://resale-web-server-progna-labony-roy.vercel.app/books?email=${user?.email}`;
+  const url = `https://resale-web-server-eight.vercel.app/books?email=${user?.email}`;
 
   const {
     data: books = [],
@@ -38,7 +39,7 @@ const MyProducts = () => {
 
   const handleDeleteUser = (user) => {
     console.log(user);
-    fetch(`https://resale-web-server-progna-labony-roy.vercel.app/books/${user.email}`, {
+    fetch(`https://resale-web-server-eight.vercel.app/books/${user.email}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -75,9 +76,11 @@ const MyProducts = () => {
                 <td>{book.book_name}</td>
                 <td>{book.resale_price}</td>
                 <td>
-                  {
-                    (book.sales_status ==='Sold') ? <p className="text-red-500">{book.sales_status}</p> : <p className="text-green-500">Unsold</p>
-                  }
+                  {book.sales_status === "Sold" ? (
+                    <p className="text-red-500">{book.sales_status}</p>
+                  ) : (
+                    <p className="text-green-500">Unsold</p>
+                  )}
                 </td>
                 <td>
                   <label
@@ -90,10 +93,18 @@ const MyProducts = () => {
                     Delete
                   </label>
                 </td>
-                <td>{
-                  book.sales_status !=='Sold' && <button className="btn btn-sm btn-success mt-3">ADVERTISEMENT</button>
-                  }
-
+                <td>
+                  {book.sales_status !== "Sold" ? (
+                    <Link to='/'>
+                      <button className="btn btn-sm btn-success mt-3">
+                        ADVERTISEMENT
+                      </button>
+                    </Link>
+                  ) : (
+                    <button disabled className="btn btn-sm btn-success mt-3">
+                      ADVERTISEMENT
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}

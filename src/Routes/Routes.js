@@ -17,6 +17,7 @@ import SellerRoute from "../Routes/SellerRoute"
 import AdminRoute from "../Routes/AdminRoute";
 import MyWishList from "../Pages/Dashboard/MyWishList";
 import Payment from "../Pages/Dashboard/Payment";
+import Advertisement from "../Pages/Home/Category/Advertisement";
 
 
 const router= createBrowserRouter([
@@ -28,11 +29,16 @@ const router= createBrowserRouter([
         {
           path: '/',
           element:<Home></Home>,
-          
+          loader: ()=> fetch(`https://resale-web-server-eight.vercel.app/books`)
         },
         {
           path:'/',
           element:<Categories></Categories>
+        },
+        {
+          path:'/',
+          element:<PrivateRoute><Advertisement></Advertisement></PrivateRoute>,
+          
         },
         {
           path: '/login',
@@ -50,7 +56,7 @@ const router= createBrowserRouter([
         {
           path:'/category/:id',
           element:<PrivateRoute><CategoryBooks></CategoryBooks></PrivateRoute>,
-          loader : ({params}) => fetch(`https://resale-web-server-progna-labony-roy.vercel.app/category2/${params.id}`)
+          loader : ({params}) => fetch(`https://resale-web-server-eight.vercel.app/category2/${params.id}`)
         },
         {
           path: '/blog',
@@ -59,7 +65,7 @@ const router= createBrowserRouter([
         {
           path: '/dashboard',
           element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
-          loader: () => fetch('https://resale-web-server-progna-labony-roy.vercel.app/users'),
+          loader: () => fetch('https://resale-web-server-eight.vercel.app/users'),
           errorElement:<ErrorElement></ErrorElement>,
           children:[
             {
@@ -67,7 +73,7 @@ const router= createBrowserRouter([
               element:<MyOrders></MyOrders>
             },
             {
-              path: '/dashboard/wishlist',
+              path: '/dashboard/mywishlist',
               element:<MyWishList></MyWishList>
             },
             {
@@ -77,17 +83,17 @@ const router= createBrowserRouter([
             {
               path: '/dashboard/addbooks',
               element:<SellerRoute><AddProduct></AddProduct></SellerRoute>,
-              // loader: ({params}) =>fetch(`https://resale-web-server-progna-labony-roy.vercel.app/books/${params.id}`)
+              // loader: ({params}) =>fetch(`https://resale-web-server-eight.vercel.app/books/${params.id}`)
             },
             {
               path: '/dashboard/myproducts',
               element:<MyProducts></MyProducts>,
-              loader: ({params}) =>fetch(`https://resale-web-server-progna-labony-roy.vercel.app/books/${params.email}`)
+              loader: ({params}) =>fetch(`https://resale-web-server-eight.vercel.app/books/${params.email}`)
             },
             {
               path: '/dashboard/payment/:id',
               element:<Payment></Payment>,
-              loader: ({params}) =>fetch(`https://resale-web-server-progna-labony-roy.vercel.app/orderedBooks/${params.id}`)
+              loader: ({params}) =>fetch(`https://resale-web-server-eight.vercel.app/orderedBooks/${params.id}`)
             }
 
           ]

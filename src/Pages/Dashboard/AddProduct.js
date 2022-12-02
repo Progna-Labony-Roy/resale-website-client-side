@@ -22,7 +22,7 @@ const AddProduct = () => {
   const { data: categoryNames, isLoading } = useQuery({
     queryKey: ["categoryName"],
     queryFn: async () => {
-      const res = await fetch("https://resale-web-server-progna-labony-roy.vercel.app/categoryNames");
+      const res = await fetch("https://resale-web-server-eight.vercel.app/categoryNames");
       const data = await res.json();
       return data;
     },
@@ -59,14 +59,14 @@ const AddProduct = () => {
             Year_of_use: data.yearOfUse,
             year_of_purchase : data.yearOfPurchase,
             book_img: imgData.data.url,
-            time_of_posting: imgData.data.lastModifiedDate,
+            time_of_posting: data.addingTime,
             original_price: data.originalPrice,
             resale_price: data.resalePrice,
             location: data.location,
             book_name: data.bookName,
           };
 
-          fetch("https://resale-web-server-progna-labony-roy.vercel.app/books", {
+          fetch("https://resale-web-server-eight.vercel.app/books", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -234,6 +234,9 @@ const AddProduct = () => {
                   </option>
                 ))}
             </select>
+            {errors.conditon && (
+            <span className="text-red-500">{errors.conditon.message}</span>
+          )}
           </div>
           <div className="form-control w-full ">
             <label className="label">
@@ -247,6 +250,9 @@ const AddProduct = () => {
                   </option>
                 ))}
             </select>
+            {errors.category && (
+            <span className="text-red-500">{errors.category.message}</span>
+          )}
           </div>
         </div>
 
