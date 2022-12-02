@@ -23,7 +23,7 @@ const Navbar = () => {
           email:user.email,
 status: "Buyer"
         }
-        fetch("http://localhost:5000/users", {
+        fetch("https://resale-web-server-progna-labony-roy.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",

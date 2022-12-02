@@ -13,7 +13,7 @@ const MyProducts = () => {
     setDeleteProduct(null);
   };
 
-  const url = `http://localhost:5000/books?email=${user?.email}`;
+  const url = `https://resale-web-server-progna-labony-roy.vercel.app/books?email=${user?.email}`;
 
   const {
     data: books = [],
@@ -38,7 +38,7 @@ const MyProducts = () => {
 
   const handleDeleteUser = (user) => {
     console.log(user);
-    fetch(`http://localhost:5000/books/${user.email}`, {
+    fetch(`https://resale-web-server-progna-labony-roy.vercel.app/books/${user.email}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,

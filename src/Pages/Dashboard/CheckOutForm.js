@@ -13,7 +13,7 @@ const CheckOutForm = ({ orders }) => {
   const [transactionId, setTransactionId] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://resale-web-server-progna-labony-roy.vercel.app/create-payment-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +75,7 @@ const CheckOutForm = ({ orders }) => {
         orderId: _id
       }
 
-      fetch("http://localhost:5000/payments", {
+      fetch("https://resale-web-server-progna-labony-roy.vercel.app/payments", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -103,7 +103,7 @@ const CheckOutForm = ({ orders }) => {
         orderId: _id
       }
 
-      fetch("http://localhost:5000/books", {
+      fetch("https://resale-web-server-progna-labony-roy.vercel.app/books", {
         method: "POST",
         headers: {
           "content-type": "application/json",

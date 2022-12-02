@@ -11,7 +11,7 @@ const CategoryBooks = () => {
   const [bookName ,setBookName] = useState(null); 
 // console.log(bookName)
   
-const url = `http://localhost:5000/category/${avaiableBooks.name}`
+const url = `https://resale-web-server-progna-labony-roy.vercel.app/category/${avaiableBooks.name}`
 
   const { data: books =[]} =useQuery({
       queryKey:['books'],

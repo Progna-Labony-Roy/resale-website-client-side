@@ -22,7 +22,7 @@ const AddProduct = () => {
   const { data: categoryNames, isLoading } = useQuery({
     queryKey: ["categoryName"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/categoryNames");
+      const res = await fetch("https://resale-web-server-progna-labony-roy.vercel.app/categoryNames");
       const data = await res.json();
       return data;
     },
@@ -66,7 +66,7 @@ const AddProduct = () => {
             book_name: data.bookName,
           };
 
-          fetch("http://localhost:5000/books", {
+          fetch("https://resale-web-server-progna-labony-roy.vercel.app/books", {
             method: "POST",
             headers: {
               "content-type": "application/json",

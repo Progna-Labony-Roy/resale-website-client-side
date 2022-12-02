@@ -7,7 +7,7 @@ const MyWishList = () => {
   const { user } = useContext(AuthContext);
   const { email, displayName } = user;
 
-  const url = `http://localhost:5000/wishlists?email=${user?.email}`;
+  const url = `https://resale-web-server-progna-labony-roy.vercel.app/wishlists?email=${user?.email}`;
 
   const { data: wishlists = [] } = useQuery({
     queryKey: ["wishlists", user?.email],

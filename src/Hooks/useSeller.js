@@ -6,7 +6,7 @@ const useSeller = email =>{
   
     useEffect(() =>{
       if(email){
-        fetch(`http://localhost:5000/users/verify/${email}`)
+        fetch(`https://resale-web-server-progna-labony-roy.vercel.app/users/verify/${email}`)
         .then(res => res.json())
         .then(data =>{
          setIsVarified(data.isVarified);

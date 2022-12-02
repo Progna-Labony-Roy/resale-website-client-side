@@ -50,7 +50,7 @@ const router= createBrowserRouter([
         {
           path:'/category/:id',
           element:<PrivateRoute><CategoryBooks></CategoryBooks></PrivateRoute>,
-          loader : ({params}) => fetch(`http://localhost:5000/category2/${params.id}`)
+          loader : ({params}) => fetch(`https://resale-web-server-progna-labony-roy.vercel.app/category2/${params.id}`)
         },
         {
           path: '/blog',
@@ -59,7 +59,7 @@ const router= createBrowserRouter([
         {
           path: '/dashboard',
           element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
-          loader: () => fetch('http://localhost:5000/users'),
+          loader: () => fetch('https://resale-web-server-progna-labony-roy.vercel.app/users'),
           errorElement:<ErrorElement></ErrorElement>,
           children:[
             {
@@ -77,17 +77,17 @@ const router= createBrowserRouter([
             {
               path: '/dashboard/addbooks',
               element:<SellerRoute><AddProduct></AddProduct></SellerRoute>,
-              // loader: ({params}) =>fetch(`http://localhost:5000/books/${params.id}`)
+              // loader: ({params}) =>fetch(`https://resale-web-server-progna-labony-roy.vercel.app/books/${params.id}`)
             },
             {
               path: '/dashboard/myproducts',
               element:<MyProducts></MyProducts>,
-              loader: ({params}) =>fetch(`http://localhost:5000/books/${params.email}`)
+              loader: ({params}) =>fetch(`https://resale-web-server-progna-labony-roy.vercel.app/books/${params.email}`)
             },
             {
               path: '/dashboard/payment/:id',
               element:<Payment></Payment>,
-              loader: ({params}) =>fetch(`http://localhost:5000/orderedBooks/${params.id}`)
+              loader: ({params}) =>fetch(`https://resale-web-server-progna-labony-roy.vercel.app/orderedBooks/${params.id}`)
             }
 
           ]

@@ -26,14 +26,11 @@ const CategoryBook = ({ avaiableBook, setBookName }) => {
         <img className="book-image" src={book_img} alt="" />
       </figure>
       <div className="card-body">
-        <div className="flex justify-between">
+        
         <div>
           <h2 className="card-title badge badge-secondary py-4">{book_name}</h2>
         </div>
-        <div>
-          <button className="btn btn-xs btn-error">Report</button>
-        </div>
-        </div>
+     
         <div className="card-actions ">
           <div className="badge badge-outline p-3">
             Resale Price: {resale_price}
@@ -64,15 +61,14 @@ const CategoryBook = ({ avaiableBook, setBookName }) => {
           >
             WishList
           </label>
-          {sales_status ==='Sold' ? <label
+          <label
             htmlFor="booking-modal"
             className="btn btn-accent mt-3"
             onClick={() => setBookName(avaiableBook)}
           >
             Book Now
           </label>
-          :<button disabled className="btn btn-accent mt-3">Book Now</button>
-          }
+         
         </div>
       </div>
     </div>

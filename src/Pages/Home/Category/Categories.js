@@ -6,7 +6,7 @@ const Categories = () => {
    
 
     useEffect( () =>{
-       fetch('http://localhost:5000/categories')
+       fetch('https://resale-web-server-progna-labony-roy.vercel.app/categories')
        .then(res=> res.json())
        .then(data=> setCategories(data))
     },[])
