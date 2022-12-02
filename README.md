@@ -4,9 +4,9 @@
 
 ## Live site link : https://assignment-12-7f5af.web.app
 
-##user's credentials:
-user email : a@gmail.com
-user password : 123456
+## user's credentials
+- user email : a@gmail.com
+- user password : 123456
 
 ### In the project we have the following features:
 - Here we have login and register option.
