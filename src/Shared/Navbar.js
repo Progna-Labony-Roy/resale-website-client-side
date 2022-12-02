@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider";
 
 const Navbar = () => {
   const { user, googleSignIn, logOut } = useContext(AuthContext);
+  const [createdUserEmail, setCreatedUserEmail] = useState('');
 
   const handleLogOut = () => {
     logOut()
@@ -16,6 +17,24 @@ const Navbar = () => {
       .then((res) => {
         const user = res.user;
         console.log(user);
+        setCreatedUserEmail(user.email);
+        const currentUser={
+          name:user.displayName,
+          email:user.email,
+status: "Buyer"
+        }
+        fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(currentUser),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCreatedUserEmail(user.email);
+        
+      });
       })
       .catch((error) => {
         console.log(error.message);

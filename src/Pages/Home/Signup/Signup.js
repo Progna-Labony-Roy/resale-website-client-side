@@ -24,7 +24,7 @@ const Signup = () => {
   // }
 
 
-  const handleSignin = (event) => {
+  const handleSignup = (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
@@ -66,7 +66,7 @@ const Signup = () => {
 
   const saveUsers = (name, email) => {
     let user = { name, email ,status:buyerSeller};
-    fetch("https://resale-web-server-eight.vercel.app/users", {
+    fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -85,7 +85,7 @@ const Signup = () => {
     <div className="flex justify-center">
       <div className="w-2/5 mt-12">
         <h2 className="text-2xl font-semibold">Please, Sign up</h2>
-        <form onSubmit={handleSignin} className="card-body">
+        <form onSubmit={handleSignup} className="card-body">
           <div className="form-control">
             <label className="label">
               <span className="label-text">Name</span>

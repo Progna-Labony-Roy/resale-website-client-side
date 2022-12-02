@@ -4,28 +4,33 @@ import { AuthContext } from "../../../Context/AuthProvider";
 
 
 const BookingModals = ({bookName ,setBookName}) => {
-  const {name ,resale_price ,location}=bookName;
+  const {name,book_name ,resale_price,book_img ,_id}=bookName;
   const {user}=useContext(AuthContext);
   const {email,displayName} =user
   
 const handleBooking = event =>{
 event.preventDefault();
 const form= event.target;
-const name=form.name.value;
+const book_name=form.book_name.value;
+const book_img=form.book_img.value;
+const resale_price=form.price.value;
 const email= form.email.value;
 const location = form.location.value;
 const phone = form.phone.value;
 const user=form.user.value;
 
 const orderedBooks= {
-   bookName :name,
+  bookID :_id,
+   book_name,
+   book_img,
+   resale_price,
    userName: user,
    email,
    location,
    phone
 }
 
-fetch('https://resale-web-server-eight.vercel.app/orderedBooks',{
+fetch('http://localhost:5000/orderedBooks',{
   method: "POST",
   headers:{
     "content-type" : 'application/json'
@@ -62,14 +67,15 @@ fetch('https://resale-web-server-eight.vercel.app/orderedBooks',{
           {name}
           </h3>
           <form onSubmit={handleBooking} className="mt-5">
-          <input type="text" name='name' default value={name} className="input input-bordered w-full  mt-3" />
+          <input type="text" name='book_name' default value={book_name} className="input input-bordered w-full  mt-3" />
+          <input type="text" name='book_img' default value={book_img} className="input input-bordered w-full  mt-3" />
           <input type="text" name='price' default value={resale_price} className="input input-bordered w-full  mt-3" />
           <input type="text" name='user' default value={displayName} className="input input-bordered w-full  mt-3" />
           <input type="text" name='email' default value={email} className="input input-bordered w-full  mt-3" />
-          <input type="text" name='location' placeholder="location" className="input input-bordered w-full  mt-3" />
-          <input type="text" name='phone' placeholder="Phone" className="input input-bordered w-full  mt-3" />
+          <input type="text" name='location' placeholder="location" className="input input-bordered w-full  mt-3" required />
+          <input type="text" name='phone' placeholder="Phone" className="input input-bordered w-full  mt-3" required/>
           <br />
-          <input className="btn btn-accent w-full  mt-3" type='submit' value='book'></input>
+          <input className="btn btn-accent w-full  mt-3" type='submit' value='Order Now'></input>
           </form>
         </div>
       </div>

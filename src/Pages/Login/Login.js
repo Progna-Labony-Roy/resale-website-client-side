@@ -17,10 +17,10 @@ const Login = () => {
   const [loginError, setLoginError] = useState("");
   const [loginUserEmail, setLoginUserEmail] = useState('');
   const [token] =useToken(loginUserEmail);
-  const location =useLocation();
+  // const location =useLocation();
   const navigate =useNavigate();
 
-  const from= location.state?.from?.pathname || '/';
+  const from= '/';
 
 if(token){
   navigate(from, {replace:true})

@@ -7,11 +7,11 @@ import { AuthContext } from "../../Context/AuthProvider";
 import Loader from "../../Shared/Loader";
 
 const AddProduct = () => {
-  const navigate=useNavigate();
-  const formData= new FormData();
+  const navigate = useNavigate();
+  const formData = new FormData();
   const { user } = useContext(AuthContext);
 
-  const imageApiKey =process.env.REACT_APP_imageb_key;
+  const imageApiKey = process.env.REACT_APP_imageb_key;
 
   const {
     register,
@@ -22,7 +22,7 @@ const AddProduct = () => {
   const { data: categoryNames, isLoading } = useQuery({
     queryKey: ["categoryName"],
     queryFn: async () => {
-      const res = await fetch("https://resale-web-server-eight.vercel.app/categoryNames");
+      const res = await fetch("http://localhost:5000/categoryNames");
       const data = await res.json();
       return data;
     },
@@ -35,50 +35,57 @@ const AddProduct = () => {
   ];
 
   const handleAddBook = (data) => {
-    console.log(data)
-    const image= data.bookImage[0]
-    formData.append("image",image);
-    const url =`https://api.imgbb.com/1/upload?key=${imageApiKey}`;
-    fetch(url ,{
-      method: 'POST',
-      body: formData
+    
+    const image = data.bookImage[0];
+    const time = data.addingTime[2];
+    console.log("Data",data)
+    formData.append("image", image);
+    const postingTime=formData.append("time", time);
+    console.log(postingTime)
+    const url = `https://api.imgbb.com/1/upload?key=${imageApiKey}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
     })
-    .then(res =>res.json())
-    .then(imgData =>{
-      if(imgData.success){
-        const books = {
-          name :data.category,
-          Sellers_name : data.sellerName,
-          email : data.email,
-          Time_of_posting :0,
-          Year_of_use: data.yearOfUse,
-          book_img :imgData.data.url,
-          original_price: data.originalPrice,
-          resale_price: data.resalePrice,
-          location :data.location,
-          book_name :data.bookName
-        }
+      .then((res) => res.json())
+      .then((imgData) => {
+        if (imgData.success) {
+          const books = {
+            name: data.category,
+            condition: data.condition,
+            Sellers_name: data.sellerName,
+            description: data.description,
+            email: data.email,
+            Year_of_use: data.yearOfUse,
+            year_of_purchase : data.yearOfPurchase,
+            book_img: imgData.data.url,
+            time_of_posting: imgData.data.lastModifiedDate,
+            original_price: data.originalPrice,
+            resale_price: data.resalePrice,
+            location: data.location,
+            book_name: data.bookName,
+          };
 
-        fetch('https://resale-web-server-eight.vercel.app/books',{
-          method:'POST',
-          headers:{
-            'content-type':'application/json',
-            authorization: `bearer ${localStorage.getItem('Token')}`
-          },
-          body: JSON.stringify(books)
-        })
-        .then(res=> res.json())
-        .then(result =>{
-          toast.success('Product added successfully')
-          navigate('/dashboard/myproducts')
-          console.log(result)
-        })
-      }
-    })
+          fetch("http://localhost:5000/books", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: `bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify(books),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              toast.success("Product added successfully");
+              navigate("/dashboard/myproducts");
+              console.log(result);
+            });
+        }
+      });
   };
 
-  if(isLoading){
-<Loader></Loader>
+  if (isLoading) {
+    <Loader></Loader>;
   }
 
   return (
@@ -117,13 +124,21 @@ const AddProduct = () => {
           </label>
           <input
             {...register("email", { required: "Enter your name" })}
-            value={user.displayName}
+            value={user.email}
             type="text"
             className="input input-bordered w-full my-2"
           />
           {errors.email && (
             <span className="text-red-500">{errors.email.message}</span>
           )}
+          <label className="label">
+            <span className="label-text">Year of purchase</span>
+          </label>
+          <input
+            {...register("yearOfPurchase", { required: "Enter year of use" })}
+            type="text"
+            className="input input-bordered w-full my-2"
+          />
           <label className="label">
             <span className="label-text">Year of use</span>
           </label>
@@ -135,6 +150,21 @@ const AddProduct = () => {
           {errors.yearOfUse && (
             <span className="text-red-500">{errors.yearOfUse.message}</span>
           )}
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Description</span>
+            </label>
+            <textarea
+              {...register("description", { required: "Add description" })}
+              type="text"
+              className="textarea textarea-bordered h-24"
+              name="description"
+              placeholder="description"
+            ></textarea>
+            {errors.description && (
+            <span className="text-red-500">{errors.description.message}</span>
+          )}
+          </div>
           <label className="label">
             <span className="label-text">Book image</span>
           </label>
@@ -145,6 +175,18 @@ const AddProduct = () => {
           />
           {errors.bookImage && (
             <span className="text-red-500">{errors.bookImage.message}</span>
+          )}
+          <label className="label">
+            <span className="label-text">Adding Time</span>
+          </label>
+          <input
+            {...register("addingTime", { required: "Enter time" })}
+            
+            type="text"
+            className="input input-bordered w-full my-2"
+          />
+          {errors.addingTime && (
+            <span className="text-red-500">{errors.addingTime.message}</span>
           )}
           <label className="label">
             <span className="label-text">Original Price</span>
@@ -184,24 +226,26 @@ const AddProduct = () => {
             <label className="label">
               <span className="label-text">Conditon</span>
             </label>
-            <select {...register("conditon")} className="select input-bordered">
-              {conditons?.length &&  conditons.map((condition) => (
-                <option key={condition.id} value={condition.name}>
-                  {condition.name}
-                </option>
-              ))}
+            <select {...register("conditon", { required: "Select Condition" })} className="select input-bordered">
+              {conditons?.length &&
+                conditons.map((condition) => (
+                  <option key={condition.id} value={condition.name}>
+                    {condition.name}
+                  </option>
+                ))}
             </select>
           </div>
           <div className="form-control w-full ">
             <label className="label">
               <span className="label-text">Category name</span>
             </label>
-            <select {...register("category")} className="select input-bordered">
-              {categoryNames?.length && categoryNames.map((categoryName) => (
-                <option key={categoryName._id} value={categoryName.name}>
-                  {categoryName.name}
-                </option>
-              ))}
+            <select {...register("category", { required: "Select Category" })} className="select input-bordered">
+              {categoryNames?.length &&
+                categoryNames.map((categoryName) => (
+                  <option key={categoryName._id} value={categoryName.name}>
+                    {categoryName.name}
+                  </option>
+                ))}
             </select>
           </div>
         </div>

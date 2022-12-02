@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import BookingModals from "./BookingModals";
 import CategoryBook from "./CategoryBook";
+import WishListModal from "./WishListModal";
 
 const CategoryBooks = () => {
   const avaiableBooks = useLoaderData();
@@ -10,7 +11,7 @@ const CategoryBooks = () => {
   const [bookName ,setBookName] = useState(null); 
 // console.log(bookName)
   
-const url = `https://resale-web-server-eight.vercel.app/category/${avaiableBooks.name}`
+const url = `http://localhost:5000/category/${avaiableBooks.name}`
 
   const { data: books =[]} =useQuery({
       queryKey:['books'],
@@ -28,6 +29,7 @@ const filterBooks =books.filter(b => b.name === avaiableBooks.name)
     }
     
    { bookName && <BookingModals bookName={bookName} setBookName={setBookName}></BookingModals>}
+   {bookName && <WishListModal bookName={bookName} setBookName={setBookName}></WishListModal>}
   </div>
 };
 
