@@ -17,7 +17,7 @@ import SellerRoute from "../Routes/SellerRoute"
 import AdminRoute from "../Routes/AdminRoute";
 import MyWishList from "../Pages/Dashboard/MyWishList";
 import Payment from "../Pages/Dashboard/Payment";
-import Advertisement from "../Pages/Home/Category/Advertisement";
+import Advertisements from "../Pages/Home/Category/Advertisements";
 
 
 const router= createBrowserRouter([
@@ -37,7 +37,7 @@ const router= createBrowserRouter([
         },
         {
           path:'/',
-          element:<PrivateRoute><Advertisement></Advertisement></PrivateRoute>,
+          element:<PrivateRoute><Advertisements></Advertisements></PrivateRoute>,
           
         },
         {

@@ -1,4 +1,5 @@
 const Advertisement = ({avaiableBook} ) => {
+  
  
     const {
         book_name,
@@ -15,7 +16,6 @@ const Advertisement = ({avaiableBook} ) => {
     
       return (
         <div>
-          <h3 className="text-2xl m1-10 flex justify-center">Advertisement</h3>
           <div className="card w-96 bg-base-100 shadow-xl mt-8">
           <figure>
             <img className="book-image" src={book_img} alt="" />

@@ -55,11 +55,7 @@ const Home = () => {
             <p>Maximun 10 days</p>
           </div>
         </div>
-      </div>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10'> {
-       user?.email && avaiableBooks?.length && avaiableBooks.map(avaiableBook => <Advertisement key={avaiableBook._id} avaiableBook={avaiableBook}></Advertisement>)
-      } </div>
-     
+      </div>     
     </div>
   );
 };
