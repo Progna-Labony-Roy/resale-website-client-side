@@ -2,10 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
+import useTitle from "../../Hooks/useTitle";
 
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
-  
+  useTitle('Dashboard')
 
   const url = `https://resale-web-server-eight.vercel.app/orderedBooks?email=${user?.email}`;
 
