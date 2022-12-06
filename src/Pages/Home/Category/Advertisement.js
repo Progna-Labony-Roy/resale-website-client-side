@@ -3,13 +3,11 @@ const Advertisement = ({avaiableBook} ) => {
  
     const {
         book_name,
-        Sellers_name,
         Year_of_use,
         book_img,
         original_price,
         resale_price,
         location,
-        time_of_posting
         } = avaiableBook;
       console.log(avaiableBook);
     
@@ -39,12 +37,7 @@ const Advertisement = ({avaiableBook} ) => {
               <div className="badge badge-outline p-3">
                 Years of use :{Year_of_use}y
               </div>
-              <div className="badge badge-outline p-3">Time of Posting :{time_of_posting}</div>
-            </div>
-            <div className="flex">
-              <div>Seller :{Sellers_name} </div>
-            </div>
-  
+            </div>  
           </div>
         </div>
         </div>

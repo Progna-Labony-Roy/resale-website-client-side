@@ -2,11 +2,12 @@ import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
+import useTitle from "../../../Hooks/useTitle";
 import useToken from "../../../Hooks/useToken";
 
 const Signup = () => {
   const navigate = useNavigate();
-
+useTitle('Signup')
   const { createUser, updateUser } = useContext(AuthContext);
   const [signupError, setSignupError] = useState();
   let [buyerSeller, setBuyerSeller] = useState('Buyer');

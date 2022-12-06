@@ -1,14 +1,11 @@
-import React, { useContext } from "react";
-import { useLoaderData } from "react-router-dom";
-import { AuthContext } from "../../Context/AuthProvider";
-import Advertisement from "./Category/Advertisement";
+import React from "react";
+import useTitle from "../../Hooks/useTitle";
+import Advertisements from "./Category/Advertisements";
 import Categories from "./Category/Categories";
 import Slider from "./Slider";
 
 const Home = () => {
-  const {user}=useContext(AuthContext)
-  const avaiableBooks= useLoaderData();
-  // console.log(avaiableBooks)
+  useTitle('BookStore')
   return (
     <div>
       <h1 className="mt-12 font-semibold font-sans text-3xl text-center italic text-green-500">
@@ -55,7 +52,8 @@ const Home = () => {
             <p>Maximun 10 days</p>
           </div>
         </div>
-      </div>     
+      </div>
+      <Advertisements></Advertisements>     
     </div>
   );
 };

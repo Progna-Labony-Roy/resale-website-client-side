@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
+import useTitle from "../../Hooks/useTitle";
 import useToken from "../../Hooks/useToken";
 
 const Login = () => {
@@ -19,6 +20,7 @@ const Login = () => {
   const [token] =useToken(loginUserEmail);
   // const location =useLocation();
   const navigate =useNavigate();
+  useTitle('Login')
 
   const from= '/';
 
