@@ -1,6 +1,4 @@
-# Website Name : Dental care
-
-## Project Name : Assignment 12
+# Website Name : BookStore
 
 ## Live site link : https://assignment-12-7f5af.web.app
 
